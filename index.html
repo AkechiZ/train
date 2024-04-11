@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akechiz的个人网站</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);*/
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 10px 0;
+      background-image: url('./img/pexels-james-wheeler-1619319.jpg');
+      background-size: cover;
+      height: 300px;
+      color: #fff;
+    }
+    .text-algin{
+      display: flex;
+    }
+    /* 左侧文本样式 */
+    .left-text {
+      flex: 1;
+      text-align: center;
+    }
+    /* 右侧文本样式 */
+    .right-text {
+      flex: 1;
+      text-align: center;
+    }
+    .avatar-content{
+      display: flex;
+      justify-content: center;
+    }
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%; /* 将图像变为圆形 */
+      overflow: hidden; /* 隐藏超出边界的内容 */
+      position: relative; /* 相对定位 */
+    }
+    /* 图片样式 */
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative; /* 相对定位 */
+      left: 50%; /* 向右偏移50% */
+      transform: translateX(-50%); /* 平移到中间 */
+    }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    .menu a:hover {
+      background-color: #555;
+    }
+
+    .list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 图片容器样式 */
+    .image-container {
+        margin: 10px;
+        text-align: center;
+        width: 300px; /* 设置容器宽度 */
+        height: 350px; /* 设置容器高度 */
+        border-radius: 10px;
+        overflow: hidden; /* 隐藏超出容器的内容 */
+        position: relative; /* 相对定位 */
+    }
+    /* 图片样式 */
+    .image-container img {
+        width: 100%; /* 图片宽度填充容器 */
+        height: 100%; /* 图片高度填充容器 */
+        border-radius: 10px;
+        object-fit: cover; /* 拉伸图片以填充容器 */
+        cursor: pointer;
+    }
+    /* 图片名字样式 */
+    .image-container p {
+        margin: 0;
+        font-size: 14px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+        color: #fff; /* 文字颜色 */
+        padding: 5px;
+        border-radius: 0 10px; /* 仅圆角化右下角 */
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px 0;
+      background: #333;
+      color: #fff;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="menu">
+  <div class="text-algin">
+    <div class="left-text">
+      <a href="#mine">My Website</a>
+    </div>
+    <div class="right-text">
+      <a href="#about">关于</a>
+      <a href="#hobbies">业余爱好</a>
+      <a href="#tech-stack">课程</a>
+    </div>
+  </div>
+
+  <div class="avatar-content">
+    <div class="avatar">
+      <img src="./img/avatar.jpeg" alt="头像">
+    </div>
+  </div>
+
+</div>
+
+<div class="container" id="about">
+  <h1>Hello, I'm Akehciz</h1>
+  <p>一个有趣的前端coder🚀</p>
+</div>
+
+<div class="container" id="hobbies">
+  <h2>我的业余爱好</h2>
+
+  <div class="list">
+
+    <div class="image-container">
+      <a href="https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E6%91%A9%E6%89%98%E8%BD%A6%E9%94%A6%E6%A0%87%E8%B5%9B" target="_blank">
+        <img src="./img/pexels-cottonbro-studio-5803146.jpg">
+        <p>骑行</p>
+      </a>
+    </div>
+
+    <div class="image-container">
+      <a href="https://ys.mihoyo.com" target="_blank">
+        <img src="./img/pexels-amaan-shaikh-20191872.jpg">
+        <p>游戏</p>
+      </a>
+    </div>
+
+    <div class="image-container">
+      <a href="https://www.zhihu.com/question/320610501" target="_blank">
+        <img src="./img/pexels-gantas-vaičiulėnas-4323815.jpg">
+        <p>露营</p>
+      </a>
+    </div>
+
+    <div class="image-container">
+      <a href="https://www.zhihu.com/question/276264018" target="_blank">
+        <img src="./img/pexels-hikerwise-20446157.jpg">
+        <p>登山</p>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="container" id="tech-stack">
+  <h2>我的课程</h2>
+
+  <div class="list">
+
+    <div class="image-container">
+      <a href="https://juejin.cn/book/6844733790204461070?enter_from=course_center&utm_source=course_center" target="_blank">
+        <img src="./img/js.png">
+      </a>
+    </div>
+
+    <div class="image-container">
+      <a href="https://juejin.cn/book/7086408430491172901?enter_from=course_center&utm_source=course_center" target="_blank">
+        <img src="./img/ts.png">
+      </a>
+    </div>
+
+    <div class="image-container">
+      <a href="https://juejin.cn/book/6945998773818490884?enter_from=course_center&utm_source=course_center" target="_blank">
+        <img src="./img/react.png">
+      </a>
+    </div>
+
+    <div class="image-container">
+      <a href="https://juejin.cn/book/6844733709808041992?enter_from=course_center&utm_source=course_center" target="_blank">
+        <img src="./img/webpack.png">
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Copyright @ 2024.Akechiz</p>
+</footer>
+
+<script>
+  function scrollToSection(sectionId) {
+    var section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+  document.querySelectorAll('.menu a').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      scrollToSection(this.getAttribute('href').substring(1));
+    });
+  });
+</script>
+
+</body>
+</html>
