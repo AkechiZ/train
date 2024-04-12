@@ -14,8 +14,6 @@
       width: 1200px;
       margin: 0 auto;
       padding: 20px;
-      background: #fff;
-      /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);*/
     }
     .menu {
       display: flex;
@@ -109,13 +107,24 @@
     }
 
     .footer {
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 10px 0;
       background: #333;
       color: #fff;
       bottom: 0;
       width: 100%;
     }
+
+    .innerline {
+      margin: 8px 0;
+    }
+    .innerline a {
+      color: white !important; /* 设置链接文本颜色为白色，并使用 !important 来覆盖默认样式 */
+      text-decoration: none; /* 去除链接的下划线 */
+    }
+
   </style>
 </head>
 <body>
@@ -213,9 +222,25 @@
   </div>
 </div>
 
-<footer class="footer">
+<div class="footer">
+  <div class="container">
+    <h4 class="project-list__header">我的作业</h4>
+    <div class="innerline">
+      <a href="./bullet-chat.html">弹幕墙</a>
+    </div>
+    <div class="innerline">
+      <a href="./bullet-chat.html">弹幕墙</a>
+    </div>
+    <div class="innerline">
+      <a href="./bullet-chat.html">弹幕墙</a>
+    </div>
+    <div class="innerline">
+      <a href="./bullet-chat.html">弹幕墙</a>
+    </div>
+  </div>
   <p>Copyright @ 2024.Akechiz</p>
-</footer>
+</div>
+
 
 <script>
   function scrollToSection(sectionId) {

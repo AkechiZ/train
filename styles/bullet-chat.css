@@ -1,0 +1,60 @@
+body{
+    background-color: #212830;
+}
+
+.display{
+    width: 100%;
+    height: 80vh;
+    border: 1px solid black;
+    margin: 0px auto;
+    font-size: 30px;
+    overflow: hidden;
+    background-color: #151A20;
+}
+
+.submit{
+    margin: 30px 0;
+}
+
+#inputline{
+    font-size: 16px;
+}
+
+#inputline{
+    width: 300px;
+}
+
+#sendout{
+    color: blue;
+}
+
+.ellipse-input {
+    padding: 8px 16px; /* 调整输入框的内边距 */
+    border-radius: 20px; /* 设置圆角半径以创建椭圆形 */
+    border: 2px solid #3498db; /* 设置输入框边框 */
+    font-size: 14px; /* 设置输入框文字大小 */
+    outline: none; /* 移除输入框的默认轮廓样式 */
+    transition: border-color 0.3s ease; /* 添加输入框边框颜色的过渡效果 */
+}
+
+.ellipse-input:focus {
+    border-color: #2980b9; /* 输入框获取焦点时改变边框颜色 */
+}
+
+.ellipse-button {
+    padding: 8px 16px; /* 调整按钮的内边距 */
+    border-radius: 15px; /* 设置圆角半径以创建椭圆形 */
+    background-color: #7DD3FC; /* 设置按钮背景颜色 */
+    color: #fff; /* 设置按钮文字颜色 */
+    text-decoration: none; /* 移除按钮的下划线 */
+    font-size: 14px; /* 设置按钮文字大小 */
+    text-align: center; /* 设置按钮文字居中 */
+    cursor: pointer; /* 设置鼠标样式为手型 */
+    transition: background-color 0.3s ease; /* 添加按钮背景颜色的过渡效果 */
+}
+
+.ellipse-button:hover {
+    background-color: #2980b9; /* 鼠标悬停时改变按钮背景颜色 */
+}
+
+/* 可以根据需要调整按钮的其他样式，比如阴影、边框等 */
