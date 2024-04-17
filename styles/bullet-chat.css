@@ -34,7 +34,7 @@ body{
     border: 2px solid #3498db; /* 设置输入框边框 */
     font-size: 14px; /* 设置输入框文字大小 */
     outline: none; /* 移除输入框的默认轮廓样式 */
-    transition: border-color 0.3s ease; /* 添加输入框边框颜色的过渡效果 */
+    transition: border-color 0.5s ease; /* 添加输入框边框颜色的过渡效果 */
 }
 
 .ellipse-input:focus {
@@ -50,7 +50,7 @@ body{
     font-size: 14px; /* 设置按钮文字大小 */
     text-align: center; /* 设置按钮文字居中 */
     cursor: pointer; /* 设置鼠标样式为手型 */
-    transition: background-color 0.3s ease; /* 添加按钮背景颜色的过渡效果 */
+    transition: background-color 0.5s ease; /* 添加按钮背景颜色的过渡效果 */
 }
 
 .ellipse-button:hover {
