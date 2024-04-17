@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>瞭风网络-企业站</title>
+  <base href="/train/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./styles/official-site/index.css" />
+</head>
+<body>
+
+<!--pc端导航-->
+<header class="relative w-full flex items-center justify-between sm:justify-around z-50 text-white bg-[#252429]">
+<div class="flex items-center ml-4 sm:mr-20">
+    <img src="./assets/official-site/logo.svg" class="w-6 h-16" alt="Logo" />
+    <span class="ml-8 text-base">企业站</span>
+  </div>
+  <nav class="nav-horizontal sm:block">
+    <ul class="flex justify-center">
+      <li class="nav-item">
+        <a class="nav-item-text" href="official-site.html">首页</a>
+      </li>
+      <li class="nav-item nav-item-active">
+        <a class="nav-item-text" href="news.html">新闻列表页</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item-text" href="about-us.html">关于我们</a>
+      </li>
+    </ul>
+  </nav>
+  <img id="menu" class="sm:hidden w-6 h-6 mr-4" src="./assets/official-site/menu.svg" alt="menu" />
+</header>
+
+<!--移动端导航-->
+<div id="drawer" class="drawer">
+  <div id="drawer-container" class="drawer-container">
+    <div id="drawer-close" class="drawer-close">
+      <img src="./assets/official-site/close.svg" alt="关闭按钮" />
+    </div>
+    <nav class="drawer-content nav-vertical">
+      <ul>
+        <li class="nav-item">
+          <a class="nav-item-text" href="official-site.html">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item-text" href="news.html">新闻列表页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item-text" href="about-us.html">关于我们</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<main class="main sm:w-[1200px]">
+  <section class="news news-light">
+    <h2 class="text-2xl text-center my-3">新闻列表页</h2>
+    <ul class="news-list sm:-mx-4" id="news-page">
+      <div class="news-empty">暂无数据</div>
+    </ul>
+
+    <div class="pagination">
+      <select class="hidden sm:block pagination-sizer">
+        <option value="8">8条/页</option>
+        <option value="16">16条/页</option>
+        <option value="32">32条/页</option>
+        <option value="64">64条/页</option>
+      </select>
+      <ul class="pagination-item-list">
+        <li class="pagination-item pagination-prev pagination-item-disabled">
+        </li>
+        <li class="pagination-item">1</li>
+        <li class="pagination-item pagination-prev-jumper">...</li>
+        <li class="pagination-item">4</li>
+        <li class="pagination-item pagination-item-active">5</li>
+        <li class="pagination-item">6</li>
+        <li class="pagination-item pagination-next-jumper">...</li>
+        <li class="pagination-item">10</li>
+        <li class="pagination-item pagination-next">&gt;</li>
+      </ul>
+      <div class="hidden sm:block pagination-jumper">
+        前往
+        <input class="pagination-jumper-input" type="number" min="1" />
+        页
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="text-white text-sm bg-[#ff350d] sm:min-w-[1200px]">
+  <div class="mx-auto w-full p-6 sm:w-[1200px]">
+    <!--全部隐藏 pc端flex布局-->
+    <address class="hidden sm:flex justify-around leading-2 not-italic">
+      <p>地址：中国上海市徐汇区宛平南路600号</p>
+      <p>邮箱：akechiz95@gmail.com</p>
+      <p>电话：0596-12345678</p>
+    </address>
+    <!-- pc端隐藏 -->
+    <div class="sm:hidden">
+      <p class="mb-2">地址：中国上海市徐汇区宛平南路600号</p>
+      <p class="mb-2">邮箱：akechiz95@gmail.com</p>
+      <p>电话：0596-12345678</p>
+    </div>
+
+    <div class="hidden sm:flex justify-center items-center mt-10 mb-30">
+      <img
+              class="mr-4 w-12 h-12"
+              src="./assets/official-site/qrcode.png"
+              alt="二维码"
+      />
+      <div class="text-center sm:text-left">
+        <p class="mb-2">Copyright © 2009 - 2022 Cld, All Rights Reserved  某某网络科技有限公司 版权所有 陕ICP备xxxxxxx号</p>
+      </div>
+    </div>
+
+    <div class="sm:hidden flex text-center mt-10 mb-30">
+      <img
+              class="mx-auto mb-4 w-12 h-12"
+              src="./assets/official-site/qrcode.png"
+              alt="二维码"
+      />
+      <p class="mb-2">Copyright © 2009 - 2022 Cld, All Rights Reserved 某某网络科技有限公司 版权所有 陕ICP备xxxxxxx号</p>
+    </div>
+  </div>
+</footer>
+<script src="./scripts/official-site/utils.js"></script>
+<script src="./scripts/official-site/index.js"></script>
+<script src="./scripts/official-site/news.js"></script>
+</body>
+</html>

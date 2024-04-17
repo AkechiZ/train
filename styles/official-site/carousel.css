@@ -1,0 +1,90 @@
+/**
+* 轮播图
+*/
+.carousel {
+    position: relative;
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-indicator {
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(-50%);
+}
+
+.carousel-indicator-item {
+    padding: 8px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all linear 0.2s;
+}
+
+.carousel-indicator-item:hover {
+    transform: scale(1.5);
+}
+
+.carousel-indicator-item-active {
+    transform: scale(1.5);
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-item {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-content-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    padding: 0 10% 10%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+}
+
+.carousel-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.carousel-title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.carousel-description {
+    margin-top: 8px;
+    font-size: 12px;
+}

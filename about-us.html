@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>关于我们</title>
+    <base href="/train/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles/official-site/index.css" />
+  </head>
+  <body>
+
+  <!--pc端导航-->
+  <header class="relative w-full flex items-center justify-between sm:justify-around z-50 text-white bg-[#252429]">
+    <div class="flex items-center ml-4 sm:mr-20">
+      <img src="./assets/official-site/logo.svg" class="w-6 h-16" alt="Logo" />
+      <span class="ml-8 text-base">企业站</span>
+    </div>
+    <nav class="nav-horizontal sm:block">
+      <ul class="flex justify-center">
+        <li class="nav-item">
+          <a class="nav-item-text" href="official-site.html">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item-text" href="news.html">新闻列表页</a>
+        </li>
+        <li class="nav-item nav-item-active">
+          <a class="nav-item-text" href="about-us.html">关于我们</a>
+        </li>
+      </ul>
+    </nav>
+    <img id="menu" class="sm:hidden w-6 h-6 mr-4" src="./assets/official-site/menu.svg" alt="menu" />
+  </header>
+
+  <!--移动端导航-->
+  <div id="drawer" class="drawer">
+    <div id="drawer-container" class="drawer-container">
+      <div id="drawer-close" class="drawer-close">
+        <img src="./assets/official-site/close.svg" alt="关闭按钮" />
+      </div>
+      <nav class="drawer-content nav-vertical">
+        <ul>
+          <li class="nav-item">
+            <a class="nav-item-text" href="official-site.html">首页</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item-text" href="news.html">新闻列表页</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item-text" href="about-us.html">关于我们</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <main class="main sm:w-[1200px]">
+      <h2 class="page-title sm:text-5xl sm:my-6">关于我们</h2>
+      <section class="flex flex-col sm:flex-row">
+        <div
+          id="amap"
+          class="flex-none sm:basis-[50%] w-full h-64 sm:h-72"
+        ></div>
+        <article
+          class="flex-none sm:basis-[50%] px-4 py-6 sm:py-0 text-sm text-[#353535]"
+        >
+          <h3
+            class="text-lg sm:text-2xl font-bold mb-4 text-black leading-none"
+          >
+            一家专注系统高端定制开发的公司
+          </h3>
+          <p>
+            互联网指的是是网络与网络之间所串连成的庞大网络，这些网络以一组通用的协议相连，形成逻辑上的单一巨大国际网络。
+          </p>
+          <p>
+            互联网始于1969年美国的阿帕网。这种将计算机网络互相联接在一起的方法可称作“网络互联”，在这基础上发展出覆盖全世界的全球性互联网络称互联网，即是互相连接一起的网络结构。
+            我们出色的专业开发团队扎实的技术支持，优质高效的服务意识和丰厚的资源优势，提供专业的网站建设，微信小程序，APP开发，等技术服务。成果，专注于为客户提供专业有效的互联网系统解决方案。
+          </p>
+          <address class="mt-4 not-italic text-xs leading-loose">
+            地址：中国上海市徐汇区宛平南路600号
+            <br />
+            邮箱：akechiz95@gmail.com
+            <br />
+            电话：0596-12345678
+          </address>
+        </article>
+      </section>
+    </main>
+
+  <footer class="text-white text-sm bg-[#ff350d] sm:min-w-[1200px]">
+    <div class="mx-auto w-full p-6 sm:w-[1200px]">
+      <!--全部隐藏 pc端flex布局-->
+      <address class="hidden sm:flex justify-around leading-2 not-italic">
+        <p>地址：中国上海市徐汇区宛平南路600号</p>
+        <p>邮箱：akechiz95@gmail.com</p>
+        <p>电话：0596-12345678</p>
+      </address>
+      <!-- pc端隐藏 -->
+      <div class="sm:hidden">
+        <p class="mb-2">地址：中国上海市徐汇区宛平南路600号</p>
+        <p class="mb-2">邮箱：akechiz95@gmail.com</p>
+        <p>电话：0596-12345678</p>
+      </div>
+
+      <div class="hidden sm:flex justify-center items-center mt-10 mb-30">
+        <img
+                class="mr-4 w-12 h-12"
+                src="./assets/official-site/qrcode.png"
+                alt="二维码"
+        />
+        <div class="text-center sm:text-left">
+          <p class="mb-2">Copyright © 2009 - 2022 Cld, All Rights Reserved  某某网络科技有限公司 版权所有 陕ICP备xxxxxxx号</p>
+        </div>
+      </div>
+
+      <div class="sm:hidden flex text-center mt-10 mb-30">
+        <img
+                class="mx-auto mb-4 w-12 h-12"
+                src="./assets/official-site/qrcode.png"
+                alt="二维码"
+        />
+        <p class="mb-2">Copyright © 2009 - 2022 Cld, All Rights Reserved 某某网络科技有限公司 版权所有 陕ICP备xxxxxxx号</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./scripts/official-site/utils.js"></script>
+  <script src="./scripts/official-site/index.js"></script>
+    <script>
+      window._AMapSecurityConfig = {
+        securityJsCode: '8b372a22ef808460a16076efae583f8a',
+      };
+    </script>
+    <script src="https://webapi.amap.com/maps?v=2.0&key=55c83b42c98232f43e7eaab409602312"></script>
+    <script>
+      const position = [121.45,31.19];
+
+      const map = new AMap.Map('amap', {
+        zoom: 14,
+        center: position,
+      });
+
+      const marker = new AMap.Marker({
+        position: position,
+        title: '宛平南路600号',
+      });
+
+      map.add(marker);
+    </script>
+  </body>
+</html>

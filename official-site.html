@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>瞭风网络-企业站</title>
+    <base href="/train/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles/official-site/index.css" />
+  </head>
+  <body>
+
+  <!--pc端导航-->
+  <header class="relative top-4 left-0 w-full flex items-center justify-between sm:justify-around z-50 h-16  text-white bg-[#252429] bg-transparent">
+      <div class="flex items-center ml-4 sm:mr-20">
+          <img src="./assets/official-site/logo.svg" class="w-6 h-6" alt="Logo" />
+          <span class="ml-8 text-base">企业站</span>
+      </div>
+      <nav class="nav-horizontal sm:block">
+          <ul class="flex justify-center">
+              <li class="nav-item nav-item-active">
+                  <a class="nav-item-text" href="official-site.html">首页</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-item-text" href="news.html">新闻列表页</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-item-text" href="about-us.html">关于我们</a>
+              </li>
+          </ul>
+      </nav>
+      <img id="menu" class="sm:hidden w-6 h-6 mr-4" src="./assets/official-site/menu.svg" alt="menu" />
+  </header>
+
+  <!--移动端导航-->
+  <div id="drawer" class="drawer">
+      <div id="drawer-container" class="drawer-container">
+        <div id="drawer-close" class="drawer-close">
+          <img src="./assets/official-site/close.svg" alt="关闭按钮" />
+        </div>
+        <nav class="drawer-content nav-vertical">
+          <ul>
+            <li class="nav-item">
+              <a class="nav-item-text" href="official-site.html">首页</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-item-text" href="news.html">新闻列表页</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-item-text" href="about-us.html">关于我们</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <main class="w-full mx-auto flex-auto -mt-16">
+      <section id="carousel" class="carousel h-80 sm:h-[700px] sm:min-w-[1200px]">
+        <div id="carousel-container" class="carousel-container"></div>
+        <div id="carousel-indicator" class="carousel-indicator"></div>
+      </section>
+
+      <div class="fixed-container flex flex-col h-auto sm:w-[1200px] sm:pb-[20%] overflow-hidden">
+        <section class="px-4 sm:flex sm:flex-row sm:bg-[#f6f6f6]">
+          <article class="text-sm sm:flex-auto sm:basis-2/5 sm:px-20 slidein-left">
+            <h2 class="page-title flex sm:text-4xl sm:my-8">服务范围</h2>
+            <p class="sm:text-base">
+              依托百度政务混合云，汇聚城市管理及公安等政务领域的自有数据及互联网公开数据，基于百度大数据多年积累的行业模型及实战经验，提供从数据整合治理到分析挖掘的一站式大数据解决方案，助力智慧政务新时代。
+            </p>
+            <p class="sm:text-base">
+              全渠道零售方案包括B2C、O2O、B2B的场景，提供APP/小程序，支持对接饿了么、美团等第三方外卖平台，基于阿里巴巴多年沉淀的业务中台技术，建立商品、会员、交易、营销等共享服务中心，实现全渠道数据的共享和一致，帮助零售商打造线上、线下无差别的全渠道销售能力。
+            </p>
+          </article>
+          <section
+            class="fadein -mx-5 sm:-mx-6 sm:-mb-[20%] mt-2 sm:flex-auto sm:basis-1/2 sm:-ml-20"
+          >
+            <div class="flex items-end justify-end">
+              <img
+                class="sm:hidden w-[21.4%] p-1"
+                data-lazy="./assets/official-site/service2.jpg"
+                alt="插图"
+              />
+              <img
+                class="sm:hidden w-[60.7%] p-1"
+                data-lazy="./assets/official-site/service1.jpg"
+                alt="插图"
+              />
+              <img
+                class="hidden sm:block w-[26.7%] p-2"
+                data-lazy="./assets/official-site/service2-lg.jpg"
+                alt="插图"
+              />
+              <img
+                class="hidden sm:block w-[72.9%] p-2"
+                data-lazy="./assets/official-site/service1-lg.jpg"
+                alt="插图"
+              />
+            </div>
+            <div class="flex items-start justify-end">
+              <img
+                class="sm:hidden w-[59%] p-1"
+                data-lazy="./assets/official-site/service4.jpg"
+                alt="插图"
+              />
+              <img
+                class="sm:hidden w-[41%] p-1"
+                data-lazy="./assets/official-site/service3.jpg"
+                alt="插图"
+              />
+              <img
+                class="hidden sm:block w-[68.5%] p-2"
+                data-lazy="./assets/official-site/service4-lg.jpg"
+                alt="插图"
+              />
+              <img
+                class="hidden sm:block w-[47.9%] p-2"
+                data-lazy="./assets/official-site/service3-lg.jpg"
+                alt="插图"
+              />
+            </div>
+            <div></div>
+          </section>
+        </section>
+      </div>
+       <section class="culture hidden sm:block h-[400px] sm:min-w-[1200px] text-white">
+        <div class="fixed-container flex items-center justify-center h-full sm:w-[1200px]">
+          <article class="px-6 relative z-10">
+            <h2 class="page-title sm:text-5xl sm:my-6">企业文化</h2>
+            <p class="indent-first-line text-white">
+              作为中国专业的企业文化咨询公司，我们在生存和发展的历程中，也形成了自己经营管理个性和文化，我们的运营和发展都基于对这些文化涵盖的信念、信条和原则持之以恒、不折不扣地执行，所有公司的成员的所有行为均需与这些标准和原则保持高度统一。
+            </p>
+            <p class="indent-first-line text-white">
+              我们相信，企业的战略可以改变，领导可以更换，甚至文化的表现也要与时俱进，总之一切都可以调整，唯一能保持并引领我们的，只有我们的文化核心。只有信念的坚持才能带来企业的持续增长，只有统一的意志才能锻炼出优秀的队伍，总之只有文化才能使我们长青。
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="team fixed-container h-auto sm:w-[1200px]">
+        <h2 class="page-title sm:text-5xl sm:my-6 slidein-right">
+          团队介绍
+        </h2>
+        <ul class="sm:flex leading-normal">
+          <li class="member sm:basis-1/3 hover-scale">
+            <div class="member-picture">
+              <img
+                data-lazy="./assets/official-site/member1.jpg"
+                alt="Jon Smith"
+              />
+            </div>
+            <div class="member-detail" data-animation="fadein">
+              <div class="member-name">Jon Smith</div>
+              <div class="member-description">特级教师，从事教育工作10年</div>
+              <div class="more sm:mt-6">More information</div>
+            </div>
+          </li>
+          <li class="member sm:basis-1/3 hover-scale">
+            <div class="member-picture">
+              <img
+                data-lazy="./assets/official-site/member2.jpg"
+                alt="Merri Bond"
+              />
+            </div>
+            <div class="member-detail" data-animation="fadein">
+              <div class="member-name">Merri Bond</div>
+              <div class="member-description">特级教师，从事教育工作10年</div>
+              <div class="more sm:mt-6">More information</div>
+            </div>
+          </li>
+          <li class="member sm:basis-1/3 hover-scale">
+            <div class="member-picture">
+              <img
+                data-lazy="./assets/official-site/member3.jpg"
+                alt="Samuel Fredman"
+              />
+            </div>
+            <div class="member-detail" data-animation="fadein">
+              <div class="member-name">Samuel Fredman</div>
+              <div class="member-description">特级教师，从事教育工作10年</div>
+              <div class="more sm:mt-6">More information</div>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section class="news fixed-container h-auto sm:w-[1200px]">
+        <h2 class="page-title sm:text-5xl sm:my-6 sm:mt-12 slidein-right">
+          新闻动态
+        </h2>
+        <ul class="news-list sm:-mx-4" id="news-list">
+          <div class="news-empty">暂无数据</div>
+        </ul>
+      </section>
+    </main>
+  <footer class="text-white text-sm bg-[#ff350d] sm:min-w-[1200px]">
+    <div class="mx-auto w-full p-6 sm:w-[1200px]">
+      <!--全部隐藏 pc端flex布局-->
+      <address class="hidden sm:flex justify-around leading-2 not-italic">
+        <p>地址：中国上海市徐汇区宛平南路600号</p>
+        <p>邮箱：akechiz95@gmail.com</p>
+        <p>电话：0596-12345678</p>
+      </address>
+      <!-- pc端隐藏 -->
+      <div class="sm:hidden">
+        <p class="mb-2">地址：中国上海市徐汇区宛平南路600号</p>
+        <p class="mb-2">邮箱：akechiz95@gmail.com</p>
+        <p>电话：0596-12345678</p>
+      </div>
+
+      <div class="hidden sm:flex justify-center items-center mt-10 mb-30">
+        <img
+            class="mr-4 w-12 h-12"
+            src="./assets/official-site/qrcode.png"
+            alt="二维码"
+        />
+        <div class="text-center sm:text-left">
+          <p class="mb-2">Copyright © 2009 - 2022 Cld, All Rights Reserved  某某网络科技有限公司 版权所有 陕ICP备xxxxxxx号</p>
+        </div>
+      </div>
+
+      <div class="sm:hidden flex text-center mt-10 mb-30">
+        <img
+            class="mx-auto mb-4 w-12 h-12"
+            src="./assets/official-site/qrcode.png"
+            alt="二维码"
+        />
+        <p class="mb-2">Copyright © 2009 - 2022 Cld, All Rights Reserved 某某网络科技有限公司 版权所有 陕ICP备xxxxxxx号</p>
+      </div>
+    </div>
+  </footer>
+  <script src="./scripts/official-site/utils.js"></script>
+  <script src="./scripts/official-site/index.js"></script>
+  </body>
+</html>

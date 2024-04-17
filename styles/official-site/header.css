@@ -1,0 +1,103 @@
+.nav-horizontal .nav-list {
+  display: flex;
+  align-items: center;
+}
+
+.nav-horizontal .nav-item {
+  position: relative;
+  font-size: 14px;
+  padding: 8px;
+}
+
+.nav-horizontal .nav-item::after {
+  position: absolute;
+  content: ' ';
+  bottom: 0;
+  left: 50%;
+  width: 24px;
+  margin-left: -12px;
+  border-bottom: 2px solid #ff350d;
+  transform: scale(0);
+  transition: all ease-in-out 0.5s;
+}
+
+/* 水平导航中活动项目或悬停项目的样式 */
+.nav-horizontal .nav-item.nav-item-active::after,
+.nav-horizontal .nav-item:hover::after {
+  transform: scale(1);
+}
+
+.navHorizontalItem .nav-item {
+  font-size: 14px;
+}
+
+.nav-horizontal .nav-item + .nav-item {
+  margin-left: 50px;
+}
+
+.nav-vertical .nav-item {
+  padding: 0 20px;
+}
+
+.nav-vertical .nav-item:active {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.nav-vertical .nav-item-text {
+  display: block;
+  padding: 32px 0;
+}
+
+.nav-vertical .nav-item + .nav-item .nav-item-text {
+  border-top: 1px solid #333;
+}
+
+
+.drawer {
+  display: none;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 激活状态 */
+.drawer-active {
+  display: block;
+}
+
+/* 抽屉内容器样式 */
+.drawer-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  max-width: 100%;
+  overflow-y: auto;
+  background-color: #252429;
+}
+
+.drawer-close {
+  position: absolute;
+  top: 14px;
+  right: 8px;
+  padding: 8px;
+}
+
+.drawer-close img {
+  width: 20px;
+  height: 20px;
+}
+
+.drawer-content {
+  font-size: 16px;
+  color: #fff;
+}
+
+.nav-horizontal {
+  display: none;
+}

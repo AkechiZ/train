@@ -1,0 +1,81 @@
+/**
+  * 定义一个元素从左侧滑入的动画效果
+**/
+.slidein-left {
+  animation: slidein-left 0.5s ease-in-out;
+}
+
+/**
+  * 定义一个元素从右侧滑入的动画效果
+**/
+.slidein-right {
+  animation: slidein-right 0.5s ease-in-out;
+}
+
+/**
+  * 定义一个元素淡入的动画效果
+**/
+.fadein {
+  animation: fedein 0.5s ease-in-out;
+}
+
+/**
+  * 定义一个元素淡出的动画效果
+**/
+.fadeout {
+  animation: fadein 0.5s ease-in-out reverse;
+}
+
+/**
+  * 定义一个在鼠标悬停时缩放图片的效果
+**/
+.hover-scale {
+  overflow: hidden;
+}
+
+.hover-scale img {
+  transition: all ease-in-out 0.5s;
+}
+
+.hover-scale:hover img {
+  transform: scale(1.1);
+}
+
+/**
+  * 定义一个元素从左侧滑入的关键帧动画 偏移50%
+**/
+@keyframes slidein-left {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/**
+  * 定义一个元素从右侧滑入的关键帧动画 偏移50%
+**/
+@keyframes slidein-right {
+  from {
+    transform: translateX(50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/**
+  * 定义一个元素淡入的关键帧动画 从0到1
+**/
+@keyframes fedein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
