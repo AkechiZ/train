@@ -48,7 +48,9 @@ $(document).ready(function(){
     }
 
     var getRandomColor = function(){
-        return '#'+('00000'+(Math.random()*0xffffff <<0).toString(16)).substr(-6); // 生成随机颜色值
+        // return '#'+('00000'+(Math.random()*0xffffff <<0).toString(16)).substr(-6); // 生成随机颜色值
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+
     }
 
     var runDanMu = function(){
