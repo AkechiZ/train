@@ -8,6 +8,9 @@
     overflow: hidden;
 }
 
+/**
+* loading进度条的效果
+*/
 .carousel-indicator {
     z-index: 10;
     position: absolute;
@@ -16,7 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(-50%);
+    transform: translateY(-50%); /* 垂直位置调整 */
 }
 
 .carousel-indicator-item {
@@ -27,11 +30,11 @@
 }
 
 .carousel-indicator-item:hover {
-    transform: scale(1.5);
+    transform: scale(1.5); /* 悬停时放大 */
 }
 
 .carousel-indicator-item-active {
-    transform: scale(1.5);
+    transform: scale(1.5); /* 激活时放大 */
 }
 
 .carousel-container {
@@ -64,9 +67,9 @@
     align-items: center;
     justify-content: end;
     padding: 0 10% 10%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-position: center; /* 背景图片居中 */
+    background-repeat: no-repeat; /* 背景图片不重复 */
+    background-size: cover; /* 背景图片铺满整个容器 */
     color: #fff;
 }
 

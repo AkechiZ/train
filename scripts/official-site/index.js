@@ -31,12 +31,12 @@ const durtation = 5000;
   if($newsList){
     $newsList.innerHTML = '';
     newsService.getRecentNews(4).then((newsList) => {
-      newsList.forEach((news, i) => {
+      newsList.data.forEach((news, i) => {
         const $newItem = createNewsItem(
             `https://loremflickr.com/320/240/dog?lock=${i}`,
             `https://loremflickr.com/320/240/dog?lock=${i}`,
             news.title,
-            news.summary,
+            news.summary.substring(0,100),
             news.id,
         );
         $newsList.append($newItem);
@@ -53,6 +53,17 @@ const durtation = 5000;
   document.addEventListener('DOMContentLoaded', function () {
     const lazyLoaderImgList = document.querySelectorAll('img[data-lazy]');
     observeLazyloadItems(lazyLoaderImgList);
+  });
+
+  //checkPoint 毛玻璃特效
+  document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('.image-loading');
+    images.forEach(function(image) {
+      image.querySelector('img').addEventListener('load', function() {
+        // 图片加载完成后，移除 "image-loading" 类
+        image.classList.remove('image-loading');
+      });
+    });
   });
 
   //移动端弹出框功能
@@ -101,7 +112,7 @@ const durtation = 5000;
       };
     });
 
-    $drawer.addEventListener('click', function () {
+    $drawer.addEventListener('click',  function () {
       $drawer.classList.toggle('drawer-active');
     });
   });

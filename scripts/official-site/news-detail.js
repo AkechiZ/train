@@ -8,7 +8,7 @@
 
   newsService.getNewsById(newsId).then((news) => {
     console.log(news);
-    createArticle(news);
+    createArticle(news.data);
   });
 
   function createArticle(news) {
@@ -30,10 +30,6 @@
 
   function createBanner() {
     return createImage('banner');
-  }
-
-  function createIllustration() {
-    return createImage('illustration');
   }
 
   function createImage(type) {

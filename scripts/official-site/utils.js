@@ -25,22 +25,23 @@ const animationObserver = new IntersectionObserver(
 const lazyloadObserver = new IntersectionObserver(
   (entries) => {
     for (const entry of entries) {
-      if (entry.intersectionRatio === 0) {
+      if (entry.intersectionRatio === 0) { //不在视口内
         return;
       }
       setImageAttr(entry.target);
-      lazyloadObserver.unobserve(entry.target);
+      lazyloadObserver.unobserve(entry.target); //进入视口了，取消观察
     }
   },
   {
     threshold: 0,
-    rootMargin: '0px 0px 0px 0px',
+    rootMargin: '0px 0px 100px 0px',
   },
 );
 
+//创建一个懒加载的图片
 function createLazyloadImage(image, placeholderImage, alt, srcset, sizes,width,height) {
   const $img = document.createElement('img');
-  $img.setAttribute('data-lazy', image);
+  $img.setAttribute('data-lazy', image); //需要时才加载
   if (srcset) {
     $img.setAttribute('data-srcset', srcset);
   }
@@ -49,7 +50,7 @@ function createLazyloadImage(image, placeholderImage, alt, srcset, sizes,width,h
     $img.setAttribute('sizes', sizes);
   }
 
-  $img.setAttribute('data-placeholder', placeholderImage);
+  $img.setAttribute('data-placeholder', placeholderImage); //占位图
   $img.setAttribute('alt', alt);
 
   if(width){
@@ -60,11 +61,11 @@ function createLazyloadImage(image, placeholderImage, alt, srcset, sizes,width,h
   }
 
   const $imgWrapper = document.createElement('div'); // 使用 <figure> 作为包装元素
-  $imgWrapper.classList.add('image--loading', 'image');
+  $imgWrapper.classList.add('image-loading', 'image');
   $imgWrapper.append($img);
 
-  $img.onload = () => {
-    $imgWrapper.classList.remove('image--loading');
+  $img.onload = () => { //加载完成，去除毛玻璃特效
+    $imgWrapper.classList.remove('image-loading');
   };
 
   return $imgWrapper;
@@ -130,20 +131,21 @@ function observeLazyloadItems(list) {
       continue;
     }
 
-    lazyloadObserver.observe(item);
+    lazyloadObserver.observe(item); //观察元素是否在窗口内
   }
 }
 
 (function () {
-  const baseUrl = 'https://661e41be98427bbbef03f6b3.mockapi.io/api/news';
+  // const baseUrl = 'https://661e41be98427bbbef03f6b3.mockapi.io/api/news';
+  const baseUrl = 'http://localhost:3000/news';
 
   class NewsService {
     newsUrl = new URL('news', baseUrl);
 
-    getNews(page, limit) {
+    getNews(page, pageSize) {
       const search = new URLSearchParams([
         ['page', String(page)],
-        ['limit', String(limit)],
+        ['pageSize', String(pageSize)],
       ]);
       const url = new URL(this.newsUrl);
       url.search = search.toString();
@@ -156,7 +158,11 @@ function observeLazyloadItems(list) {
     }
 
     getNewsById(id) {
-      const url = new URL(this.newsUrl.toString() + '/' + id);
+      const search = new URLSearchParams([
+        ['id', String(id)]
+      ]);
+      const url = new URL(this.newsUrl);
+      url.search = search.toString();
 
       return fetch(url).then((res) => res.json());
     }
@@ -166,24 +172,33 @@ function observeLazyloadItems(list) {
 })();
 
 (function () {
+  // 创建 MutationObserver 实例，用于监听 DOM 变化
   const domObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
+      // 如果添加的节点数为 0，则直接返回，不进行任何操作
       if (mutation.addedNodes.length === 0) {
         return;
       }
 
+      // 遍历新添加的节点
       mutation.addedNodes.forEach((node) => {
+        // 检查节点是否为 HTMLElement 类型，以确保只处理 HTML 元素节点
         if (node instanceof HTMLElement) {
+          // 在新添加的节点中查找带有 data-animation 属性的元素
           const animationItems = node.querySelectorAll('[data-animation]');
+          // 对找到的带有 data-animation 属性的元素进行处理
           observeAnimationItems(animationItems);
 
+          // 在新添加的节点中查找带有 data-lazy 属性的元素
           const lazyloadItems = node.querySelectorAll('[data-lazy]');
+          // 对找到的带有 data-lazy 属性的元素进行处理
           observeLazyloadItems(lazyloadItems);
         }
       });
     });
   });
 
+  // 开始观察整个文档的 body 元素，配置为监视子节点的添加或删除，以及在整个子树中观察节点的变化
   domObserver.observe(document.body, {
     childList: true,
     subtree: true,
@@ -219,14 +234,18 @@ function matchParent(node, parent) {
   return matchParent(node.parentElement, parent);
 }
 
-//轮播图dom对象
+/**
+ * 轮播图dom对象
+ * data-lazy懒加载
+ * data-placeholder占位符
+ * **/
 function createBannerDom(index) {
   const banner = newBannerInfos[index];
 
   const $carouselItem = document.createElement('div')
   $carouselItem.innerHTML = `
       <div class="carousel-item">
-          <div class="carousel-content-wrapper">
+          <div class="carousel-content-wrapper image-loading">
             <!-- 图片 -->
             <img class="carousel-image w-full h-full object-cover"  data-lazy=${banner.image} data-src="图片路径" data-placeholder=${banner.imagePlaceholder}
                 alt="横幅" srcset=${banner.imageSet}>

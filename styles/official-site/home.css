@@ -42,7 +42,7 @@ article p + p {
     position: relative;
     background-image: url('../../assets/official-site/banner4.jpg');
     background-size: cover; /*  cover填充 */
-    background-attachment: fixed; /* fixed固定 */
+    background-attachment: fixed; /* fixed固定 形成视觉滚动*/
 }
 
 /* 伪元素 半透明遮罩效果 */

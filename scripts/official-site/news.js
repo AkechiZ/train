@@ -1,6 +1,7 @@
 (function () {
   const url = new URL(window.location.href);
-  const TOTAL = 100;
+  let TOTAL = 100;
+  let pagination = 10;
   let page = url.searchParams.get('page') || '1';
   let limit = url.searchParams.get('limit') || '8';
 
@@ -37,21 +38,21 @@
     window.location.href = url.toString();
   });
 
-  generatePagination(TOTAL, +page, +limit);
-
   const $newsList = document.querySelector('#news-page');
 
   newsService.getNews(page, limit).then((newsList) => {
     $newsList.innerHTML = '';
-    newsList.forEach((news, i) => {
+    newsList.data.forEach((news, i) => {
       const $newItem = createNewsItem(
         `https://loremflickr.com/320/240/dog?lock=${page * limit + i}`,
         `https://loremflickr.com/320/240/dog?lock=${page * limit + i}`,
         news.title,
-        news.summary,
+        news.summary.substring(0,100),
         news.id,
       );
-
+      TOTAL = newsList.links.total
+      pagination = newsList.links.pagination
+      generatePagination(TOTAL, +page, +limit);
       $newsList.append($newItem);
     });
   });
