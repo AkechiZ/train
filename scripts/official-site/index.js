@@ -31,7 +31,7 @@ const durtation = 5000;
   if($newsList){
     $newsList.innerHTML = '';
     newsService.getRecentNews(4).then((newsList) => {
-      newsList.data.forEach((news, i) => {
+      newsList.forEach((news, i) => {
         const $newItem = createNewsItem(
             `https://loremflickr.com/320/240/dog?lock=${i}`,
             `https://loremflickr.com/320/240/dog?lock=${i}`,

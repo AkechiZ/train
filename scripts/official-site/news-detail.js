@@ -8,7 +8,7 @@
 
   newsService.getNewsById(newsId).then((news) => {
     console.log(news);
-    createArticle(news.data);
+    createArticle(news);
   });
 
   function createArticle(news) {

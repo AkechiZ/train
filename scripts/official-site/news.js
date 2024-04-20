@@ -42,7 +42,7 @@
 
   newsService.getNews(page, limit).then((newsList) => {
     $newsList.innerHTML = '';
-    newsList.data.forEach((news, i) => {
+    newsList.forEach((news, i) => {
       const $newItem = createNewsItem(
         `https://loremflickr.com/320/240/dog?lock=${page * limit + i}`,
         `https://loremflickr.com/320/240/dog?lock=${page * limit + i}`,
@@ -50,8 +50,8 @@
         news.summary.substring(0,100),
         news.id,
       );
-      TOTAL = newsList.links.total
-      pagination = newsList.links.pagination
+      // TOTAL = newsList.links.total
+      // pagination = newsList.links.pagination
       generatePagination(TOTAL, +page, +limit);
       $newsList.append($newItem);
     });

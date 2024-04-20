@@ -136,16 +136,16 @@ function observeLazyloadItems(list) {
 }
 
 (function () {
-  // const baseUrl = 'https://661e41be98427bbbef03f6b3.mockapi.io/api/news';
-  const baseUrl = 'http://localhost:3000/news';
+  const baseUrl = 'https://661e41be98427bbbef03f6b3.mockapi.io/api/news';
+  // const baseUrl = 'http://localhost:3000/news';
 
   class NewsService {
     newsUrl = new URL('news', baseUrl);
 
-    getNews(page, pageSize) {
+    getNews(page, limit) {
       const search = new URLSearchParams([
         ['page', String(page)],
-        ['pageSize', String(pageSize)],
+        ['limit', String(limit)],
       ]);
       const url = new URL(this.newsUrl);
       url.search = search.toString();
@@ -158,11 +158,7 @@ function observeLazyloadItems(list) {
     }
 
     getNewsById(id) {
-      const search = new URLSearchParams([
-        ['id', String(id)]
-      ]);
-      const url = new URL(this.newsUrl);
-      url.search = search.toString();
+      const url = new URL(this.newsUrl.toString() + '/' + id);
 
       return fetch(url).then((res) => res.json());
     }
