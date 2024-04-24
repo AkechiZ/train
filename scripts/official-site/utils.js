@@ -94,7 +94,8 @@ function createNewsItem(image, placeholderImage, title, summary, id) {
   $a.href = `./news-detail.html?id=${id}`;
 
   const $newsItem = document.createElement('li');
-  $newsItem.classList.add('news-item', 'sm:basis-1/4', 'sm:px-4');
+  $newsItem.classList.add('news-item','max-w-md','md:max-w-full');
+  // $newsItem.classList.add('news-item','w-full','md:w-1/2','lg:w-full');
   $newsItem.append($imgWrapper, $title, $summary, $a);
 
   return $newsItem;

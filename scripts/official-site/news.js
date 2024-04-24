@@ -39,6 +39,7 @@
   });
 
   const $newsList = document.querySelector('#news-page');
+  $newsList.classList.add('grid','lg:grid-cols-4','md:grid-cols-3','sm:grid-cols-2');
 
   newsService.getNews(page, limit).then((newsList) => {
     $newsList.innerHTML = '';
