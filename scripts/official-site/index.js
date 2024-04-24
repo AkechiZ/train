@@ -28,6 +28,7 @@ const durtation = 5000;
 
 (function () {
   const $newsList = document.querySelector('#news-list');
+  $newsList.classList.add('grid','lg:grid-cols-4','md:grid-cols-3','sm:grid-cols-2');
   if($newsList){
     $newsList.innerHTML = '';
     newsService.getRecentNews(4).then((newsList) => {
