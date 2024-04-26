@@ -29,7 +29,10 @@ document.addEventListener("DOMContentLoaded", function() {
         arr.push(text); // 将值放入数据数组中
 
         let textObj = document.createElement("div");
-        screen.appendChild(textObj); // 在屏幕上添加弹幕
+        textObj.textContent = text;
+        screen.appendChild(textObj); // 在屏幕上添加随机选择的弹幕
+        moveObj(textObj); // 移动弹幕对象
+
     }
 
     let moveObj = function(obj) {
