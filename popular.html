@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Popular</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <base href="/train/github-popular/">
+</head>
+<body>
+<div id="container"></div>
+<!--cdn-->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://kit.fontawesome.com/bb2fa05758.js" crossorigin="anonymous"></script>
+
+
+<script type="text/babel">
+    const primaryColor = "#D38181";
+
+    class Service {
+        api = new URL("https://api.github.com/search/repositories?sort=stars&order=desc&type=Repositories&page=${page}&per_page=${per_page}");
+        getRepositories(params) {
+            const newUrl = new URL(this.api);
+
+            const { language, ...restParams } = params;
+
+            newUrl.searchParams.set("q", `stars:>1 language:${language}`);
+
+            Object.entries(restParams).forEach(([key, value]) => {
+                newUrl.searchParams.set(key, value);
+            });
+
+            const localStorageKey = `github_${params.page}_${params.per_page}_${language}`;
+
+            const cache = this.getCache(localStorageKey);
+
+            if (cache != null) {
+                return Promise.resolve(cache);
+            }
+
+            Object.entries(params).forEach(([key, value]) => {
+                newUrl.searchParams.set(key, value);
+            });
+
+            return fetch(newUrl)
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+
+                    throw res;
+                })
+                .then((data) => {
+                    this.setCache(localStorageKey, data.items);
+
+                    return data.items;
+                });
+        }
+
+        setCache(cacheKey, data) {
+            window.localStorage.setItem(
+                cacheKey,
+                JSON.stringify({
+                    timestamp: Date.now(),
+                    data,
+                }),
+            );
+        }
+
+        getCache(cacheKey) {
+            const cache = window.localStorage.getItem(cacheKey);
+
+            if (!cache) {
+                return null;
+            }
+
+            try {
+                const result = JSON.parse(cache);
+                console.log(result.data);
+                return result.data;
+            } catch (error) {
+                console.error(error);
+                return null;
+            }
+        }
+    }
+
+    const service = new Service();
+
+    function App() {
+        const url = new URL(window.location.href);
+        const [language] = React.useState(url.searchParams.get("language"));
+        const [loading, setLoading] = React.useState(true);
+        const [loadingMore, setLoadingMore] = React.useState(false);
+        const [projects, setProjects] = React.useState([]);
+        const [errorOccurred, setErrorOccurred] = React.useState(false);
+        const pageNumberRef = React.useRef(1);
+
+        const getRank = () =>{
+            service
+                .getRepositories({
+                    language,
+                    page: 1,
+                    per_page: 30,
+                })
+                .then((data) => {
+                    setLoading(false);
+                    setProjects((prevProjects) => projects.concat(data));
+                })
+                .catch((err) => {
+                    const message = getError(err);
+                    // const message = err
+
+                    if (message) {
+                        setErrorOccurred(message);
+                    } else {
+                        setErrorOccurred(true);
+                    }
+                    console.error(err);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        }
+
+        React.useEffect(() => {
+            getRank()
+        }, [language]);
+
+        const onLoadMore = () => {
+            if (loadingMore) {
+                return;
+            }
+
+            setLoadingMore(true);
+
+            service
+                .getRepositories({
+                    language,
+                    page: pageNumberRef.current + 1,
+                    per_page: 30,
+                })
+                .then((data) => {
+                    setProjects((prevProjects) => projects.concat(data));
+                    pageNumberRef.current += 1
+                })
+                .catch((err) => {
+                    const message = getError(err);
+
+                    if (!message) {
+                        console.error(err);
+                        alert("发生未知错误，请重试");
+                    } else {
+                        alert(message);
+                    }
+                })
+                .finally(() => {
+                    setLoadingMore(false);
+                });
+        };
+
+        return (
+            <Layout>
+                <Top
+                    value={language}
+                    onChange={(value) => {
+                        const url = new URL(window.location.href);
+                        if (value) {
+                            url.searchParams.set("language", value);
+                        } else {
+                            url.searchParams.delete("language");
+                        }
+                        window.location.href = url.toString(); //重定向
+                    }}
+                />
+                <Content>
+                    {loading ? (
+                        <Loading />
+                    ) : errorOccurred ? (
+                        <Empty
+                            message={
+                                typeof errorOccurred === "string"
+                                    ? errorOccurred
+                                    : "发生未知错误，请刷新页面重试"
+                            }
+                        />
+                    ) : (
+                        <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+                            {projects.map((project, i) => (
+                                <div  style={{padding: 8}}   key={project.id} className="max-w-md md:max-w-full">
+                                    <Card
+                                        rank={i + 1}
+                                        url={project.html_url}v
+                                        avatar={project.owner.avatar_url}
+                                        name={project.name}
+                                        username={project.owner.login}
+                                        stars={project.stargazers_count}
+                                        forks={project.forks}
+                                        issues={project.open_issues}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    {!loading && !errorOccurred && (
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                margin: "16px 0",
+                            }}
+                        >
+                            <Button loading={loadingMore} onClick={onLoadMore}>
+                                加载更多
+                            </Button>
+                        </div>
+                    )}
+                </Content>
+            </Layout>
+        );
+    }
+
+    function getError(res) {
+        if (!(res instanceof Response) ) return false
+        if (!res.headers.has("x-ratelimit-remaining")) return false
+
+        if (res.headers.get("x-ratelimit-remaining") === "0") {
+            const currentTime = Math.floor(Date.now() / 1000);
+            let time = Math.max(0, Math.ceil((res.headers.get("x-ratelimit-reset") - currentTime)))
+            return `请在${time}秒后重新请求`
+        }
+        return false;
+    }
+
+    function formatNumber(num) {
+        return Intl.NumberFormat("en-US", { style: "decimal" }).format(num);
+    }
+
+    function Layout(props) {
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    minWidth: "500px",
+                    height: "100%",
+                }}
+            >
+                {props.children}
+            </div>
+        );
+    }
+
+    function Content(props) {
+        return (
+            <div
+                style={{
+                    flex: "auto",
+                    minHeight: 0,
+                    margin: "0 auto",
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                }}
+            >
+                {props.children}
+            </div>
+        );
+    }
+
+    function Top(props) {
+        const languages = [
+            { value: "javascript", title: "Javascript" },
+            { value: "ruby", title: "Ruby" },
+            { value: "java", title: "Java" },
+            { value: "css", title: "CSS" },
+            { value: "python", title: "Python" },
+        ];
+
+        return (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center"}}>
+                <ul style={{ display: "flex", alignItems: "center", margin: 16 }}>
+                    <FilterItem active={!props.value} onClick={() => props.onChange()}>
+                        All
+                    </FilterItem>
+                    {languages.map((lang) => (
+                        <FilterItem
+                            key={lang.value}
+                            active={props.value === lang.value}
+                            onClick={() => props.onChange(lang.value)}
+                        >
+                            {lang.title}
+                        </FilterItem>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
+
+    function FilterItem(props) {
+        return (
+            <ul
+                style={{
+                    padding: "0 8px",
+                    cursor: "pointer",
+                    color: props.active ? primaryColor : undefined,
+                }}
+                onClick={props.onClick}
+            >
+                {props.children}
+            </ul>
+        );
+    }
+
+    function Card(props) {
+        return (
+            <CardContainer>
+                <Rank value={props.rank} />
+                <Avatar src={props.avatar} />
+                <ProjectName href={props.url}>{props.name}</ProjectName>
+                <ProjectDetails>
+                    <ProjectDetailsItem
+                        icon={<FontAwesomeIcon name="user" color="orange" />}
+                        emphasis
+                    >
+                        {props.username}
+                    </ProjectDetailsItem>
+                    <ProjectDetailsItem
+                        icon={<FontAwesomeIcon name="star" color="yellow" />}
+                    >
+                        {formatNumber(props.stars)} stars
+                    </ProjectDetailsItem>
+                    <ProjectDetailsItem
+                        icon={<FontAwesomeIcon name="code-fork" color="#1f74e7" />}
+                    >
+                        {formatNumber(props.forks)} forks
+                    </ProjectDetailsItem>
+                    <ProjectDetailsItem
+                        icon={
+                            <FontAwesomeIcon
+                                name="triangle-exclamation"
+                                color="#f14c4c"
+                            />
+                        }
+                    >
+                        {formatNumber(props.issues)} open issues
+                    </ProjectDetailsItem>
+                </ProjectDetails>
+            </CardContainer>
+        );
+    }
+
+    function Rank(props) {
+        return <div style={{ fontSize: 32 }}>#{props.value}</div>;
+    }
+
+    function Avatar(props) {
+        return (
+            <img
+                style={{
+                    width: 80,
+                    height: 80,
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                    objectFit: "cover",
+                }}
+                src={props.src}
+                alt="头像"
+                loading="lazy"
+            />
+        );
+    }
+
+    function ProjectName(props) {
+        return (
+            <div
+                style={{
+                    textAlign: "center",
+                    width:"100%",
+                    marginTop: 16,
+                    fonsSize: 24,
+                    fonstWeight: "bold",
+                    color: primaryColor,
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                }}
+            >
+                <a href={props.href}>{props.children}</a>
+            </div>
+        );
+    }
+
+    function ProjectDetails(props) {
+        return <dl style={{ width: "100%" }}>{props.children}</dl>;
+    }
+
+    function ProjectDetailsItem(props) {
+        return (
+            <div style={{ display: "flex", alignItems: "center" }}>
+                <dt>{props.icon}</dt>
+                <dd
+                    style={{
+                        fontWeight: props.emphasis ? "bold" : "normal",
+                        marginLeft: 8,
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                    }}
+                >
+                    {props.children}
+                </dd>
+            </div>
+        );
+    }
+
+    function FontAwesomeIcon(props) {
+        const size = props.size || 16;
+
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: size,
+                    height: size,
+                    color: props.color,
+                    fontSize: size,
+                }}
+            >
+                <i className={`fa-solid fa-${props.name} ${props.className}`}></i>
+            </div>
+        );
+    }
+
+    function CardContainer(props) {
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    border: "1px solid rgba(0, 0, 0, 0.5)",
+                    borderRadius: 4,
+                    padding: "16px 32px",
+                }}
+            >
+                {props.children}
+            </div>
+        );
+    }
+
+    function Button(props) {
+        const { loading, ...restProps } = props;
+
+        return (
+            <button
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    minWidth: 48,
+                    border: "1px solid rgba(0, 0, 0, 0.6)",
+                    borderRadius: 8,
+                    padding: "8px 16px",
+                    fontSize: 14,
+                    color: "#000",
+                    backgroundColor: primaryColor,
+                    cursor: "pointer",
+                }}
+                {...restProps}
+            >
+                {props.loading && (
+                    <div style={{ marginRight: 8 }}>
+                        <FontAwesomeIcon name="spinner" className="fa-spin-pulse" />
+                    </div>
+                )}
+                {props.children}
+            </button>
+        );
+    }
+
+    function Center(props) {
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    ...props.style,
+                }}
+            >
+                {props.children}
+            </div>
+        );
+    }
+
+    function Empty(props) {
+        return (
+            <Center style={{ height: 200 }}>
+                <p>{props.message}</p>
+            </Center>
+        );
+    }
+
+    function Loading() {
+        return (
+            <Center style={{ height: 200 }}>
+                <FontAwesomeIcon
+                    size={48}
+                    name="spinner"
+                    className="fa-spin-pulse"
+                />
+            </Center>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('container')).render(<App />);
+</script>
+
+</body>
+</html>
