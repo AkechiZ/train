@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
             b: parseInt(result2[3], 16)
         } : null;
 
-        // 计算每种颜色的亮度
+        // 计算每种颜色的亮度f
         let lum1 = luminanace(rgb1Obj.r, rgb1Obj.g, rgb1Obj.b);
         let lum2 = luminanace(rgb2Obj.r, rgb2Obj.g, rgb2Obj.b);
 
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
             screen.appendChild(textObj); // 在屏幕上添加随机选择的弹幕
             moveObj(textObj); // 移动弹幕对象
         }
-        setTimeout(runDanMu, 1000); // 每隔一秒继续运行弹幕
+        setTimeout(runDanMu, 500); // 每隔一秒继续运行弹幕
     };
 
     runDanMu(); // 开始运行弹幕
